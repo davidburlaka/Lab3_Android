@@ -41,24 +41,13 @@ public class MoviesListAdapter extends ArrayAdapter<String> {
         TextView yearText = (TextView) rowView.findViewById(R.id.year);
         TextView typeText = (TextView) rowView.findViewById(R.id.type);
 
-        System.out.println(position);
-        if (position == 1)
-            image.setImageResource(R.drawable.poster_01);
-        else if (position == 2)
-            image.setImageResource(R.drawable.poster_02);
-        else if (position ==  3)
-            image.setImageResource(R.drawable.poster_03);
-        else if (position ==  4)
-            image.setImageResource(R.drawable.poster_05);
-        else if (position ==  6)
-            image.setImageResource(R.drawable.poster_06);
-        else if (position ==  7)
-            image.setImageResource(R.drawable.poster_07);
-        else if (position ==  8)
-            image.setImageResource(R.drawable.poster_08);
-        else if (position ==  10)
-            image.setImageResource(R.drawable.poster_10);
-        else image.setImageResource(R.drawable.no_poster);
+        int drawableResourceId = this.getContext().getResources().getIdentifier(
+                movies.get(position).getPoster().toLowerCase().replace(".jpg", ""),
+                "drawable", this.getContext().getPackageName());
+        if (drawableResourceId == 0)
+            image.setImageResource(R.drawable.no_poster);
+        else
+            image.setImageResource(drawableResourceId);
 
         titleText.setText(maintitle.get(position));
         yearText.setText(movies.get(position).getYear());
